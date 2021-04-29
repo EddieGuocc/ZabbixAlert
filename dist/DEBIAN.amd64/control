@@ -1,6 +1,8 @@
 Package: ytzabbixalert
-Version: 21.4.6
+Version: 21.4.29
 Architecture: amd64
+Maintainer: Guo Chang Yi <guochangyi@yingtongkeji.cn>
+Original-Maintainer: Guo Chang Yi <guochangyi@yingtongkeji.cn>
 Installed-Size: 642
 Section: net
 Priority: optional

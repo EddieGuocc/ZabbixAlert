@@ -30,7 +30,7 @@ type TokenResponse struct {
 }
 
 type MsgRequest struct {
-	ToUser  string     `json:"touser"`
+	ToParty string     `json:"toparty"`
 	MsgType string     `json:"msgtype"`
 	AgentId string     `json:"agentid"`
 	Text    MsgContent `json:"text"`
@@ -79,24 +79,24 @@ func getAccessToken() error {
 /*
  * token重试机制
  */
-func tokenExpiredRetry(content, toUser string) (bool, error) {
+func tokenExpiredRetry(content, toParty string) (bool, error) {
 	logging.Info("token已经过期，重新获取")
 	err := getAccessToken()
 	if err != nil {
 		return false, err
 	}
-	_, err = sendMessage2WeChat(content, toUser)
+	_, err = sendMessage2WeChat(content, toParty)
 	if err != nil {
 		return false, err
 	}
 	return true, nil
 }
 
-func sendMessage2WeChat(content, toUser string) (bool, error) {
+func sendMessage2WeChat(content, toParty string) (bool, error) {
 	if TOKEN != `` {
 		fullUrl := fmt.Sprintf(setting.AppSetting.WeChatMessageUrl+"?access_token=%s", TOKEN)
 		requestBody := MsgRequest{}
-		requestBody.ToUser = toUser
+		requestBody.ToParty = toParty
 		requestBody.MsgType = "text"
 		requestBody.Safe = int8(setting.AppSetting.Safe)
 		requestBody.AgentId = setting.AppSetting.AgentId
@@ -132,7 +132,7 @@ func sendMessage2WeChat(content, toUser string) (bool, error) {
 			logging.Info(fmt.Sprintf("发送微信消息成功 ====> result[%s]", string(body)))
 			return true, nil
 		} else if responseBody.ErrCode == WX_API_TOKEN_EXPIRED_CODE {
-			return tokenExpiredRetry(content, toUser)
+			return tokenExpiredRetry(content, toParty)
 		} else {
 			return false, fmt.Errorf(string(body))
 		}
@@ -163,13 +163,13 @@ func main() {
 
 	// 网络层面
 	if strings.Contains(os.Args[1], model.NAT_PLATFORM) || strings.Contains(os.Args[1], model.ROUTER_PLATFORM) {
-		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.ToAllUser)
+		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.NetworkPartyId)
 		if err != nil {
 			logging.Error(err.Error())
 		}
 		// 服务层面
 	} else {
-		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.ToUser)
+		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.DeveloperPartyId)
 		if err != nil {
 			logging.Error(err.Error())
 		}

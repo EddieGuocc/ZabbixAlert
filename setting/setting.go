@@ -12,12 +12,13 @@ type App struct {
 	LogSavePath      string
 	CompanyId        string
 	AgentId          string
+	DeveloperPartyId string
+	NetworkPartyId   string
 	CompanySecret    string
 	WeChatTokenUrl   string
 	WeChatMessageUrl string
 	Safe             uint
 	ToAllUser        string
-	ToUser           string
 }
 
 var AppSetting = &App{}

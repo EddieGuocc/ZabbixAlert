@@ -1,0 +1,7 @@
+Package: ytzabbixalert
+Version: 21.4.6
+Architecture: amd64
+Installed-Size: 642
+Section: net
+Priority: optional
+Description: zbxmscli

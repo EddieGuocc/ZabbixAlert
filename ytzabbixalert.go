@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 	"ytzabbixalert/logging"
+	"ytzabbixalert/model"
 	"ytzabbixalert/setting"
 )
 
@@ -160,18 +161,18 @@ func main() {
 		}
 	}
 
-	/*// 网络层面
+	// 网络层面
 	if strings.Contains(os.Args[1], model.NAT_PLATFORM) || strings.Contains(os.Args[1], model.ROUTER_PLATFORM) {
 		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.ToAllUser)
 		if err != nil {
 			logging.Error(err.Error())
 		}
-	// 服务层面
+		// 服务层面
 	} else {
 		_, err := sendMessage2WeChat(os.Args[2], setting.AppSetting.ToUser)
 		if err != nil {
 			logging.Error(err.Error())
 		}
-	}*/
+	}
 
 }

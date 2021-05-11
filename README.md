@@ -2,8 +2,9 @@
 
 zabbix自定义告警脚本，通过配置zabbix的Media、Action来实现调用自定义脚本，自定义脚本通过企业微信API来实现告警功能。
 
-[Zabbix配置事件文档]: https://www.zabbix.com/documentation/5.0/zh/manual/config/notifications
-[企业微信开发文档]: https://work.weixin.qq.com/api/doc/90000/90135/90664
+Zabbix配置事件文档，请移步 https://www.zabbix.com/documentation/5.0/zh/manual/config/notifications
+
+企业微信开发文档，请移步 https://work.weixin.qq.com/api/doc/90000/90135/90664
 
 zabbix版本5.0.3
 
